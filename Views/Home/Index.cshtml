@@ -1,0 +1,38 @@
+﻿@model IndexViewModel
+
+<!--CSS styling for display table-->
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+</style>
+
+<!--table displaying data results-->
+<table>
+    <!--column names-->
+    <tr>
+        <th>Bowler</th>
+        <th>Address</th>
+        <th>Phone</th>
+    </tr>
+    <!--column data-->
+    @foreach (var x in Model.Bowlers)
+    {
+        <tr>
+            <td>@x.BowlerLastName, @x.BowlerFirstName @x.BowlerMiddleInit</td>
+            <td>@x.BowlerAddress <br /> @x.BowlerCity, @x.BowlerState @x.BowlerZip</td>
+            <td>@x.BowlerPhoneNumber</td>
+        </tr>
+    }
+</table>
+
+<div page-info="@Model.PageNumberingInfo" page-url-teamname="@Model.TeamName"></div>

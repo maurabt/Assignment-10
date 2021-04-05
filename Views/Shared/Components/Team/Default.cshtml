@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Team>
+
+<!--FILE DESIGNED TO DISPLAY THE SIDE MENU AND PASS TEAM NAME AND ID WHEN A TEAM IS SELECTED-->
+
+    <!--determining and displaying what team is being displayed based on what is in the url-->
+    @foreach (var x in Model)
+    {
+        @if ((Context.Request.Path).ToString().EndsWith(x.TeamName))
+        {
+            <h2>@x.TeamName's Bowlers </h2>
+        }
+    }
+
+<!--adding "home" to the menu-->    
+<a asp-action="Index" asp-controller="Home" asp-route-teamid="">Home</a>
+
+    <!--displaying each team in the side menu-->
+    @foreach (var x in Model)
+    {
+        <!--using the url to determine what team we're viewing; bolding the team name we are looking at-->
+        @if ((Context.Request.Path).ToString().EndsWith(x.TeamName))
+        {
+            <a style="font-weight:bold" asp-action="Index" asp-controller="Home" asp-route-teamid="@x.TeamId" asp-route-teamname="@x.TeamName">@x.TeamName</a>
+        }
+        else
+        {
+            <a asp-action="Index" asp-controller="Home" asp-route-teamid="@x.TeamId" asp-route-teamname="@x.TeamName">@x.TeamName</a>
+        }
+        <br />
+    }
